@@ -1,3 +1,4 @@
+
 // add like
 // remove like
 // add comment
@@ -9,19 +10,111 @@
 //login
 //logout
 
-const state = {
+const defaultState = {
   VrButtonClicked: false,
-  selectedUser: '',
+  clickedUser: '',
   mobile: false,
-  currentUser: ''
+  currentUser: {
+    panos: [],
+    user: {
+      name: ''
+    }
+  },
+  clickedPano: {
+    user: {
+      name: '',
+      id: '',
+      email:'',
+    },
+    pano: {
+      id: '',
+      caption: '',
+      pano_url: '',
+      user_id: '',
+      caption: ''
+    }
+  },
+  panos: [],
+  likes: '',
+  comments: []
 }
 
-export default function managePano(state = { panos: []}, action) {
+const reducer = (state = defaultState, action) => {
   switch (action.type){
-    case 'something':
-      return 'something'
+    case 'MOBILE_TOGGLE':
+      return {
+        ...state,
+        mobile: !state.mobile
+      }
+    case 'CREATE_USER':
+      return {
+        ...state,
+        currentUser: action.payload.currentUser
+      }
+    case 'GET_USER':
+      return {
+        ...state,
+        currentUser: action.payload.currentUser
+      }
+    case 'CLICKED_USER':
+      return {
+        ...state,
+        clickedUser: action.payload.clickedUser
+      }
+    case 'LOGOUT':
+      return {
+        ...state,
+        currentUser: '',
+        clickedUser: ''
+      }
+    case 'GET_PANOS':
+    return {
+      ...state,
+      panos: action.payload.panos
+    }
+    case 'CREATE_PANO':
+
+      return {
+        ...state,
+        clickedPano: action.payload.clickedPano
+      }
+    case 'GET_PANO':
+      return {
+        ...state,
+        clickedPano: action.payload.clickedPano
+      }
+    case 'SELECTED_PANO':
+      return {
+        ...state,
+        clickedPano: action.payload.clickedPano
+      }
+      // initial amount of likes upon loggin in
+    case 'LIKE':
+      return {
+        ...state,
+        likes: action.payload.likes
+      }
+      // subsequent likes made to posts
+    case 'ADD_LIKE':
+      return {
+        ...state,
+        likes: state.likes + 1
+      }
+    case 'UNLIKE':
+      return {
+        ...state,
+        likes: state.likes - 1
+      }
+    case 'ADD_COMMENT':
+      const newComments = state.comments.push(action.payload.comment)
+      return {
+        ...state,
+        comments: newComments
+      }
     default:
       return state
   }
 
 }
+
+export default reducer

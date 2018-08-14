@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUser } from '../actions/actions.js'
+import { createUser } from '../actions/actions.js'
 import { withRouter } from 'react-router-dom'
 
-class Login extends React.Component {
+
+class CreateUser extends React.Component {
 
   state = {
     user: {
       email: '',
-      password: '',
-      id: 1
+      name: '',
+      password: ''
     }
   }
 
@@ -18,6 +19,7 @@ class Login extends React.Component {
       user: {
         ...this.state.user,
       [e.target.email]: e.target.value,
+      [e.target.name]: e.target.value,
       [e.target.password]: e.target.value
       }
     })
@@ -25,16 +27,19 @@ class Login extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.getUser(this.state.user)
+    this.props.createUser(this.state.user)
     this.props.history.push("/profile")
+    
   }
 
   render () {
     console.log(this.state.password);
     return (
       <div className="login">
-        <h3>Login</h3>
+        <h3>Create User</h3>
         <form onSubmit={this.handleSubmit}>
+          <label>Name</label>
+          <input type="text" name='name' value={this.state.name} onChange={this.handleChange}/>
           <label>Email</label>
           <input type="text" name='email' value={this.state.email} onChange={this.handleChange}/>
           <br/>
@@ -50,8 +55,8 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: (data) => {dispatch(getUser(data))}
+    createUser: (data) => {dispatch(createUser(data))}
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(Login))
+export default withRouter(connect(null, mapDispatchToProps)(CreateUser))
