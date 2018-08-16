@@ -6,18 +6,18 @@ import { getPanos } from '../actions/actions.js'
 class Home extends React.Component {
 
   componentDidMount () {
-   this.props.getPanos()
+    this.props.getPanos()
  }
 
  panos = () => {
-   return this.props.panos.map(pano => {
-
-     return <PanoContainer key={pano.id} pano={pano} caption={pano.caption} url={pano.pano_url} user={pano.user.name}/>
+   const panos =  this.props.panos.map(pano => {
+     const date = new Date(pano.pano.created_at)
+     return <PanoContainer key={pano.pano.id} pano={pano.pano} caption={pano.pano.caption} url={pano.pano.pano_url} user={pano.user.name} date={date.toDateString()}/>
    })
+   return panos.reverse()
  }
 
   render(){
-
 
     return (
       <div className='panos'>

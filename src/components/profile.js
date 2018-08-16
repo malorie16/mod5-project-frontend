@@ -9,10 +9,16 @@ class Profile extends React.Component {
 
 
   userPanos = () => {
-    return this.props.currentUser.panos.map(pano => {
+    if (!this.props.currentUser.panos) {
+      return
+    } else {
 
-      return <PanoContainer key={pano.id} pano={pano} caption={pano.caption} url={pano.pano_url} user={this.props.currentUser.name}/>
+    const panos = this.props.currentUser.panos.map(pano => {
+      const date = new Date(pano.created_at)
+      return <PanoContainer key={pano.id} pano={pano} caption={pano.caption} url={pano.pano_url} user={this.props.currentUser.name} date={date.toDateString()}/>
     })
+    return panos.reverse()
+    }
   }
   //iterate through user.panos and render pano containers
 

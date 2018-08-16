@@ -61,6 +61,7 @@ class CreatePano extends React.Component {
           className='drop'
           multiple={false}
           accept="image/*"
+          disablePreview={false}
           onDrop={this.onImageDrop}>
           <p>Drop it like its hot</p>
         </Dropzone>

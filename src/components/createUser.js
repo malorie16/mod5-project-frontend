@@ -29,14 +29,14 @@ class CreateUser extends React.Component {
     e.preventDefault()
     this.props.createUser(this.state.user)
     this.props.history.push("/profile")
-    
+
   }
 
   render () {
     console.log(this.state.password);
     return (
       <div className="login">
-        <h3>Create User</h3>
+        <h3>Signup</h3>
         <form onSubmit={this.handleSubmit}>
           <label>Name</label>
           <input type="text" name='name' value={this.state.name} onChange={this.handleChange}/>

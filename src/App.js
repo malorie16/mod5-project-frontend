@@ -15,7 +15,14 @@ import PanoPost from './components/panoPostPage.js'
 
 class App extends Component {
 
+
+ renderRoute = (route) => {
+   return this.props.currentUser.user.name !== 'logged out' ?  route : <Redirect to='/login' />
+
+ }
+
   render() {
+    console.log('CURRENT USER:', this.props.currentUser);
     // console.log(this.state.pano.image);
     // console.log('gotten pano:', this.state.getPano);
     return (
@@ -24,32 +31,36 @@ class App extends Component {
 
         <Switch>
             <Route path="/upload" render={(routerProps) => {
-
-                return <CreatePano handlePano={this.handlePano}/>
+              return this.renderRoute(<CreatePano handlePano={this.handlePano}/>)
 
               }} />
             <Route path="/profile" render={(routerProps) => {
-                return  <Profile />
+                return this.renderRoute(<Profile/>)
               }} />
             <Route path="/profile/:id" render={(routerProps) => {
                 return  <Profile />
               }} />
-
             <Route path='/vr' render={(routerProps) => {
             // ternary based on if mobile state is true panoramaDesktop or PanoramaMobile
-                  return <PanoramaMobile /> }}/>
+              return this.renderRoute(<PanoramaMobile/>)
 
+                }}/>
              <Route path="/view" render={(routerProps) => {
-                 return <PanoPost  />
+               return this.renderRoute(<PanoPost/>)
+
                   }} />
              <Route path="/home" render={(routerProps) => {
-                 return <Home  />
+               return this.renderRoute(<Home/>)
+
                }} />
              <Route path="/signup" render={(routerProps) => {
                  return <CreateUser  />
                }} />
+             <Route path="/login" render={(routerProps) => {
+                 return this.props.currentUser.user.name === 'logged out' ?  <Login/> : <Redirect to='/profile' />
+               }} />
              <Route path="/" render={(routerProps) => {
-                 return <Login  />
+               return <Redirect to='/login'/>
                }} />
           </Switch>
       </div>
@@ -59,7 +70,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    mobile: state.mobile
+    mobile: state.mobile,
+    currentUser: state.currentUser
   }
 }
 

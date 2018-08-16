@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getPanos, selectedPano, getPano, getUser } from '../../actions/actions.js'
+import { getPanos, selectedPano, getPano } from '../../actions/actions.js'
 import { Link, withRouter } from 'react-router-dom'
-
 
 class PanoContainer extends React.Component {
 
@@ -26,7 +25,7 @@ class PanoContainer extends React.Component {
         caption: this.props.clickedPano.pano.caption
       }
     })
-   this.props.getPanos()
+   // this.props.getPanos()
  }
 
  handleVR = () => {
@@ -73,7 +72,7 @@ class PanoContainer extends React.Component {
          <p><Link to='/vr' onClick={this.handleVR}>View in VR</Link></p>
        </div>
        <div className="card-reveal">
-         <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
+         <span className="card-title grey-text text-darken-4">{this.props.date}<i className="material-icons right">close</i></span>
          <p>{this.props.caption}</p>
        </div>
      </div>
@@ -100,4 +99,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { getPanos, selectedPano, getPano, getUser })(PanoContainer))
+export default withRouter(connect(mapStateToProps, { getPanos, selectedPano, getPano })(PanoContainer))
+//getUser

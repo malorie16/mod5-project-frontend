@@ -1,3 +1,4 @@
+const BASE_URL = 'http://localhost:3030/'
 const USER_URL = 'http://localhost:3030/users'
 const PANO_URL = 'http://localhost:3030/panos'
 const LIKES_URL = 'http://localhost:3030/likes'
@@ -17,31 +18,102 @@ export const createUser = (user) => {
     fetch(USER_URL, options)
       .then(r => r.json())
       .then(data => {
-        dispatch({
-          type: 'CREATE_USER',
-          payload: {
-            currentUser: data
-          }
+        fetch(BASE_URL + 'current_user', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accepts: 'application/json',
+        Authorization: data.token
+      }
+    }).then(r => r.json())
+        .then(user => {
+          localStorage.setItem('token', data.token)
+          dispatch({
+            type: 'CREATE_USER',
+            payload: {
+              currentUser: user
+            }
+          })
         })
       })
   }
 }
 //{email: user.email, name: user.name, password: user.password}
-export const getUser = (user) => {
+// export const getUser = (user) => {
+//   const options = {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json',
+//       },
+//       method: 'POST',
+//       body: JSON.stringify({auth: {
+//         user
+//       }})
+//   }
+//
+//   return (dispatch) => {
+//
+//     console.log(dispatch);
+//     fetch(USER_URL + `/${user.email}`)
+//       .then(r => r.json())
+//       .then(data => {
+//         dispatch({
+//           type: 'GET_USER',
+//           payload: {
+//             currentUser: data
+//           }
+//         })
+//       })
+//   }
+// }
 
+// dispatch({
+//   type: GET_USER,
+//   //data.token  is our token to set in local storage
+//   payload: data.token
+// })
+
+
+
+export const loginUser = (email, password) => {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      email: email,
+      password: password
+    })
+  }
   return (dispatch) => {
+    //fetch to auth controller to get token
+    fetch(BASE_URL + 'auth', options)
+    .then(res => res.json())
+    .then(data => {
+      //fetch to current user path
+      fetch(BASE_URL + 'current_user', {
+    headers: {
+      'Content-Type': 'application/json',
+      Accepts: 'application/json',
+      Authorization: data.token
+    }
+  }).then(r => r.json())
+      .then(user => {
+        if (user.status) {
+          return alert('Incorrect email address or password')
 
-    console.log(dispatch);
-    fetch(USER_URL + `/${user.id}`)
-      .then(r => r.json())
-      .then(data => {
+        } else {
+        localStorage.setItem('token', data.token)
         dispatch({
           type: 'GET_USER',
           payload: {
-            currentUser: data
+            currentUser: user
           }
         })
+        }
       })
+    })
   }
 }
 
@@ -59,6 +131,7 @@ export const getPanos = () => {
     fetch(PANO_URL)
       .then(r => r.json())
       .then(data => {
+        console.log('panos:', data);
         dispatch({
           type: 'GET_PANOS',
           payload: {
@@ -76,7 +149,6 @@ export const getPano = (id) => {
     fetch(PANO_URL + `/${id}`)
       .then(r => r.json())
       .then(data => {
-        console.log('getpano:',data);
 
         dispatch({
           type: 'GET_PANO',
@@ -115,7 +187,7 @@ export const createPano = (pano) => {
     fetch(PANO_URL, options)
       .then(r => r.json())
       .then(data => {
-        console.log('panofetch:', data);
+        console.log('create pano fetch', data);
         dispatch({
           type: 'CREATE_PANO',
           payload: {
@@ -126,6 +198,11 @@ export const createPano = (pano) => {
                 pano_url: data.pano_url,
                 user_id: data.user_id,
                 caption: data.caption
+              },
+              user: {
+                name: data.user.name,
+                id: data.user.id,
+                email: data.user.email
               }
             }
           }

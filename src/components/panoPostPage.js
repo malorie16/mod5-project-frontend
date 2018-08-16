@@ -30,10 +30,10 @@ class PanoPost extends React.Component {
   }
 
   render() {
-    console.log('panopage', this.state.clickedPano);
+    console.log('panopage', this.props.clickedPano);
     return (
       <div>
-      <PanoContainer pano={this.state.pano}/>
+      <PanoContainer pano={this.props.clickedPano.pano} caption={this.props.clickedPano.pano.caption} url={this.props.clickedPano.pano.pano_url} user={this.props.clickedPano.user.name}/>
       </div>
     )
   }
@@ -42,7 +42,8 @@ class PanoPost extends React.Component {
 const mapStateToProps = (state) => {
 
   return {
-    clickedPano: state.clickedPano
+    clickedPano: state.clickedPano,
+    currentUser: state.currentUser
   }
 }
 

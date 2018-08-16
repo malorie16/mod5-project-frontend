@@ -12,12 +12,13 @@
 
 const defaultState = {
   VrButtonClicked: false,
+  currentUserToken: '',
   clickedUser: '',
   mobile: false,
   currentUser: {
     panos: [],
     user: {
-      name: ''
+      name: 'logged out'
     }
   },
   clickedPano: {
@@ -31,7 +32,8 @@ const defaultState = {
       caption: '',
       pano_url: '',
       user_id: '',
-      caption: ''
+      caption: '',
+      created_at: ''
     }
   },
   panos: [],
@@ -52,6 +54,7 @@ const reducer = (state = defaultState, action) => {
         currentUser: action.payload.currentUser
       }
     case 'GET_USER':
+
       return {
         ...state,
         currentUser: action.payload.currentUser
@@ -62,9 +65,14 @@ const reducer = (state = defaultState, action) => {
         clickedUser: action.payload.clickedUser
       }
     case 'LOGOUT':
+      localStorage.removeItem('token')
       return {
         ...state,
-        currentUser: '',
+        currentUser: {
+          user: {
+            name: 'logged out'
+          }
+        },
         clickedUser: ''
       }
     case 'GET_PANOS':
