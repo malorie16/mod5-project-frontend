@@ -17,6 +17,8 @@ const defaultState = {
   mobile: false,
   currentUser: {
     panos: [],
+    comments:[],
+    likes: '',
     user: {
       name: 'logged out'
     }
@@ -33,12 +35,13 @@ const defaultState = {
       pano_url: '',
       user_id: '',
       caption: '',
-      created_at: ''
+      created_at: '',
+      comments: []
     }
   },
   panos: [],
-  likes: '',
-  comments: []
+  oneLike: [],
+  allComments: []
 }
 
 const reducer = (state = defaultState, action) => {
@@ -106,7 +109,7 @@ const reducer = (state = defaultState, action) => {
     case 'ADD_LIKE':
       return {
         ...state,
-        likes: state.likes + 1
+        oneLike: action.payload.likes
       }
     case 'UNLIKE':
       return {
@@ -114,11 +117,16 @@ const reducer = (state = defaultState, action) => {
         likes: state.likes - 1
       }
     case 'ADD_COMMENT':
-      const newComments = state.comments.push(action.payload.comment)
+      const newComment = state.comments.push(action.payload.comment)
       return {
         ...state,
-        comments: newComments
+        comments: newComment
       }
+    case 'GET_COMMENTS':
+    return {
+      ...state,
+      allComments: action.payload.comments
+    }
     default:
       return state
   }

@@ -14,8 +14,15 @@ class Profile extends React.Component {
     } else {
 
     const panos = this.props.currentUser.panos.map(pano => {
-      const date = new Date(pano.created_at)
-      return <PanoContainer key={pano.id} pano={pano} caption={pano.caption} url={pano.pano_url} user={this.props.currentUser.name} date={date.toDateString()}/>
+      const likes = !pano.likes ? null : pano.likes.length
+      const likeId = !pano.likes[0] ? null : pano.likes[0].id
+      const comments = pano.comments.map(comment => {
+          const date = new Date(comment.created_at)
+            return <li>{date.toDateString()}: {comment.comment} </li>
+
+       })
+      const panoDate = new Date(pano.created_at)
+      return <PanoContainer key={pano.id} id={pano.pano.id} likes={likes} likeId={likeId} comments={comments} pano={pano} caption={pano.caption} url={pano.pano.pano_url} user={pano.user.name} date={panoDate.toDateString()}/>
     })
     return panos.reverse()
     }
@@ -24,7 +31,7 @@ class Profile extends React.Component {
 
   render() {
 
-    console.log(this.props);
+    console.log(this.props.currentUser);
 
     return (
       <div>

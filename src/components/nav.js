@@ -14,6 +14,16 @@ class Nav extends React.Component {
     return this.props.history.location.pathname === '/signup' ? <Link to='/login' >Login</Link> : <Link to='/signup' >Signup</Link>
   }
 
+  click = () => {
+     // not sure why I need this twice...
+    this.props.history.goBack()
+    return this.props.history.goBack()
+  }
+  renderBackButton = () => {
+    return this.props.history.location.pathname === '/vr' ? <a hreh='#' onClick={this.click} >Back</a> : null
+
+  }
+
   currentUser = () => {
     if (this.props.currentUser.user.name === 'logged out') {
       return (
@@ -41,6 +51,7 @@ class Nav extends React.Component {
             <a href="" className="brand-logo">{this.props.currentUser.name}</a>
             <a href="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
               <ul className="right hide-on-med-and-down">
+                <li>{this.renderBackButton()}</li>
                 <li><Link to='/home'>Home</Link></li>
                 <li><Link to='/profile'>Profile</Link></li>
                 <li><Link to='/upload'>Create Post</Link></li>
@@ -50,6 +61,7 @@ class Nav extends React.Component {
           </nav>
 
           <ul className="sidenav sidenav-close" id="mobile-demo">
+            <li>{this.renderBackButton()}</li>
             <li><Link to='/home'>Home</Link></li>
             <li><Link to='/profile'>Profile</Link></li>
             <li> <Link to='/upload'>Create Post</Link></li>
@@ -77,7 +89,6 @@ class Nav extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('map state in nav', state.currentUser.user.name);
   return {
     currentUser: state.currentUser
   }

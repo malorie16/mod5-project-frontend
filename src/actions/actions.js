@@ -131,7 +131,7 @@ export const getPanos = () => {
     fetch(PANO_URL)
       .then(r => r.json())
       .then(data => {
-        console.log('panos:', data);
+        console.log('geting panos!');
         dispatch({
           type: 'GET_PANOS',
           payload: {
@@ -149,7 +149,7 @@ export const getPano = (id) => {
     fetch(PANO_URL + `/${id}`)
       .then(r => r.json())
       .then(data => {
-
+        console.log('in get user:', data);
         dispatch({
           type: 'GET_PANO',
           payload: {
@@ -163,7 +163,8 @@ export const getPano = (id) => {
                 id: data.pano.id,
                 caption: data.pano.caption,
                 pano_url: data.pano.pano_url,
-                user_id: data.pano.user_id
+                user_id: data.pano.user_id,
+                comments: data.comments
               }
             }
           }
@@ -221,19 +222,20 @@ export const selectedPano = (pano) => {
 }
 //
 
-export const like = (likes, pano) => {
+export const like = (pano) => {
   const options = {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json'
     },
-    body: JSON.stringify({like: {likes: likes, pano_id: pano.id}})
+    body: JSON.stringify({like: {likes: pano.likes, pano_id: pano.pano_id}})
   }
   return (dispatch) => {
     fetch(LIKES_URL, options)
       .then(r => r.json())
       .then(data => {
+        console.log('like post:', data);
         dispatch({
           type: 'LIKE',
           payload: {
@@ -244,19 +246,20 @@ export const like = (likes, pano) => {
   }
 }
 
-export const addLike = (likes, pano) => {
+export const addLike = (pano) => {
   const options = {
     method: 'PATCH',
     headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json'
     },
-    body: JSON.stringify({like: {likes: likes, pano_id: pano.id}})
+    body: JSON.stringify({like: {likes: pano.likes, pano_id: pano.pano_id}})
   }
   return (dispatch) => {
-    fetch(LIKES_URL, options)
+    fetch(LIKES_URL + `/${pano.like_id}`, options)
       .then(r => r.json())
       .then(data => {
+        console.log('add like action:', data);
         dispatch({
           type: 'ADD_LIKE',
           payload: {
@@ -290,26 +293,28 @@ export const unlike = (likes, pano) => {
   }
 }
 
-export const addComment = (comment, pano) => {
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({comment: {comment: comment, pano_id: pano.id}})
+export const addComment = (comment) => {
+  return {
+    type: 'ADD_COMMENT',
+    payload: {
+      comment: comment
+    }
   }
+}
+
+export const getComments = () => {
   return (dispatch) => {
-    fetch(COMMENTS_URL, options)
-      .then(r => r.json())
-      .then(data => {
-        dispatch({
-          type: 'ADD_COMMENT',
-          payload: {
-            comment: data
-          }
-        })
+    fetch(COMMENTS_URL)
+    .then(r => r.json())
+    .then(data => {
+      console.log('getting comments!');
+      dispatch({
+        type: 'GET_COMMENTS',
+        payload: {
+          comments: data
+        }
       })
+    })
   }
 }
 

@@ -22,7 +22,6 @@ class App extends Component {
  }
 
   render() {
-    console.log('CURRENT USER:', this.props.currentUser);
     // console.log(this.state.pano.image);
     // console.log('gotten pano:', this.state.getPano);
     return (
