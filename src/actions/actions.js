@@ -1,16 +1,15 @@
 const BASE_URL = 'https://limitless-reaches-60351.herokuapp.com/'
-const USER_URL = 'https://limitless-reaches-60351.herokuapp.com//users'
-const PANO_URL = 'https://limitless-reaches-60351.herokuapp.com//panos'
-const LIKES_URL = 'https://limitless-reaches-60351.herokuapp.com//likes'
-const COMMENTS_URL = 'https://limitless-reaches-60351.herokuapp.com//comments'
+const USER_URL = 'https://limitless-reaches-60351.herokuapp.com/users/'
+const PANO_URL = 'https://limitless-reaches-60351.herokuapp.com/panos'
+const LIKES_URL = 'https://limitless-reaches-60351.herokuapp.com/likes'
+const COMMENTS_URL = 'https://limitless-reaches-60351.herokuapp.com/comments'
 
 export const createUser = (user) => {
   const options = {
     method: 'POST',
     headers: {
-      'Content-type': 'application/json'
-      // Accept: 'application/json'
-
+      'Content-type': 'application/json',
+      Accept: 'application/json'
     },
     body: JSON.stringify({user: {email: user.email, name: user.name, password: user.password}})
   }
@@ -42,9 +41,8 @@ export const createUser = (user) => {
 export const loginUser = (email, password) => {
   const options = {
     headers: {
-      'Content-Type': 'application/json'
-      // Accept: 'application/json'
-
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
     },
     method: 'POST',
     body: JSON.stringify({
@@ -61,7 +59,7 @@ export const loginUser = (email, password) => {
       fetch(BASE_URL + 'current_user', {
     headers: {
       'Content-Type': 'application/json',
-
+      Accept: 'application/json',
       Authorization: data.token
     }
   }).then(r => r.json())
@@ -144,8 +142,8 @@ export const createPano = (pano) => {
   const options = {
     method: 'POST',
     headers: {
-      'Content-type': 'application/json'
-      // Accept: 'application/json'
+      'Content-type': 'application/json',
+      Accept: 'application/json'
 
     },
     body: JSON.stringify({pano: {user_id: pano.userId, pano_url: pano.url, caption: pano.caption}})
@@ -193,9 +191,8 @@ export const like = (pano) => {
   const options = {
     method: 'POST',
     headers: {
-      'Content-type': 'application/json'
-      // Accept: 'application/json'
-
+      'Content-type': 'application/json',
+      Accept: 'application/json'
     },
     body: JSON.stringify({like: {likes: pano.likes, pano_id: pano.pano_id}})
   }
@@ -218,9 +215,8 @@ export const addLike = (pano) => {
   const options = {
     method: 'PATCH',
     headers: {
-      'Content-type': 'application/json'
-      // Accept: 'application/json'
-
+      'Content-type': 'application/json',
+      Accept: 'application/json'
     },
     body: JSON.stringify({like: {likes: pano.likes, pano_id: pano.pano_id}})
   }
@@ -243,9 +239,8 @@ export const unlike = (likes, pano) => {
   const options = {
     method: 'PATCH',
     headers: {
-      'Content-type': 'application/json'
-      // Accept: 'application/json'
-
+      'Content-type': 'application/json',
+      Accept: 'application/json'
     },
     body: JSON.stringify({like: {likes: likes, pano_id: pano.id}})
   }
@@ -268,9 +263,8 @@ export const addComment = (pano) => {
     const options = {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json'
-        // Accept: 'application/json'
-
+        'Content-type': 'application/json',
+        Accept: 'application/json'
       },
       body: JSON.stringify({comment: {comment: pano.comment, pano_id: pano.pano_id}})
      }
