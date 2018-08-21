@@ -1,8 +1,8 @@
-const BASE_URL = 'http://limitless-reaches-60351.herokuapp.com/=/'
-const USER_URL = 'http://limitless-reaches-60351.herokuapp.com//users'
-const PANO_URL = 'http://limitless-reaches-60351.herokuapp.com//panos'
-const LIKES_URL = 'http://limitless-reaches-60351.herokuapp.com//likes'
-const COMMENTS_URL = 'http://limitless-reaches-60351.herokuapp.com//comments'
+const BASE_URL = 'https://limitless-reaches-60351.herokuapp.com/=/'
+const USER_URL = 'https://limitless-reaches-60351.herokuapp.com//users'
+const PANO_URL = 'https://limitless-reaches-60351.herokuapp.com//panos'
+const LIKES_URL = 'https://limitless-reaches-60351.herokuapp.com//likes'
+const COMMENTS_URL = 'https://limitless-reaches-60351.herokuapp.com//comments'
 
 export const createUser = (user) => {
   const options = {
@@ -268,7 +268,7 @@ export const addComment = (pano) => {
       body: JSON.stringify({comment: {comment: pano.comment, pano_id: pano.pano_id}})
      }
      return (dispatch) => {
-       fetch('http://limitless-reaches-60351.herokuapp.com/comments', options)
+       fetch('https://limitless-reaches-60351.herokuapp.com/comments', options)
        .then(r => r.json())
        .then(data => {
          dispatch({
