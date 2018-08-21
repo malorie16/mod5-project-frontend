@@ -2,10 +2,16 @@ import React from 'react'
 // import { connect } from 'react-redux'
 import PanoContainer from './panocontainer/panocontainer.js'
 import { connect } from 'react-redux'
+import { getPanos } from '../actions/actions.js'
+
 
 
 
 class Profile extends React.Component {
+
+  componentDidMount(){
+    this.props.getPanos()
+  }
 
 
   userPanos = () => {
@@ -21,13 +27,12 @@ class Profile extends React.Component {
             return <li>{date.toDateString()}: {comment.comment} </li>
 
        })
-      const panoDate = new Date(pano.created_at)
+      const panoDate = new Date(pano.pano.created_at)
       return <PanoContainer key={pano.id} id={pano.pano.id} likes={likes} likeId={likeId} comments={comments} pano={pano} caption={pano.caption} url={pano.pano.pano_url} user={pano.user.name} date={panoDate.toDateString()}/>
     })
     return panos.reverse()
     }
   }
-  //iterate through user.panos and render pano containers
 
   render() {
 
@@ -48,4 +53,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(Profile)
+export default connect(mapStateToProps, { getPanos })(Profile)

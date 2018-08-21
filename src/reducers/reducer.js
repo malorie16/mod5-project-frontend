@@ -117,10 +117,15 @@ const reducer = (state = defaultState, action) => {
         likes: state.likes - 1
       }
     case 'ADD_COMMENT':
-      const newComment = state.comments.push(action.payload.comment)
+      const pano = state.panos.find(pano => pano.pano.id === action.payload.comment[action.payload.comment.length - 1].pano_id)
+
+      const panoIndex = state.panos.findIndex(pano => pano.pano.id === action.payload.comment[action.payload.comment.length - 1].pano_id)
+      // debugger
+      pano.comments.push(action.payload.comment[action. payload.comment.length - 1])
+
       return {
         ...state,
-        comments: newComment
+        panos: state.panos
       }
     case 'GET_COMMENTS':
     return {

@@ -293,13 +293,28 @@ export const unlike = (likes, pano) => {
   }
 }
 
-export const addComment = (comment) => {
-  return {
-    type: 'ADD_COMMENT',
-    payload: {
-      comment: comment
-    }
-  }
+export const addComment = (pano) => {
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({comment: {comment: pano.comment, pano_id: pano.pano_id}})
+     }
+     return (dispatch) => {
+       fetch('http://localhost:3030/comments', options)
+       .then(r => r.json())
+       .then(data => {
+         dispatch({
+           type: 'ADD_COMMENT',
+           payload: {
+             comment: data
+           }
+         })
+       })
+     }
 }
 
 export const getComments = () => {

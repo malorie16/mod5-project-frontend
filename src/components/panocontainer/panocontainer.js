@@ -14,14 +14,12 @@ class PanoContainer extends React.Component {
       caption:''
     },
     comment: '',
-    //likes will equal props from object
-    likes: this.props.likes || 0,
-    likeId: parseInt(this.props.likeId),
     comments: this.props.comments || [],
     render: true
   }
 
   componentDidMount () {
+
     // this.props.getComments()
     // this.setState({
     //   comments: this.props.allComments
@@ -34,24 +32,16 @@ class PanoContainer extends React.Component {
    this.props.history.push(`/vr`)
  }
 
- //shows # of likes
- // renderLikes = () => {
- //   if (!this.props.likes) {
- //     return
- //   } else {
- //     return this.state.likes
- //   }
- // }
-
-//renders comments
+ //renders comments
  // renderComments = () => {
  //   if (!this.state.comments) {
  //     return
  //   } else {
  //     const coms = this.state.comments.map(comment => {
+ //       console.log(comment.comment);
  //       const date = new Date(comment.comment.created_at)
  //       if (comment.pano.id === this.props.id)
- //      return <li>{date.toDateString()}: {comment.comment.comment} </li>
+ //      return <li>{date.toDateString()}: {comment.comment} </li>
  //    })
  //    return coms.reverse()
  //    }
@@ -65,6 +55,8 @@ class PanoContainer extends React.Component {
  //    }
  //  }
 
+
+
 //makes comment input a controlled field
  handleText = (e) => {
    this.setState({
@@ -73,7 +65,7 @@ class PanoContainer extends React.Component {
  }
 
 //clears comment form
- resetForm = () => {
+ resetForm = (e) => {
    this.setState({
      comment: ''
    })
@@ -82,28 +74,20 @@ class PanoContainer extends React.Component {
  //makes POST request when comment form submits
  handleSubmit = (e) => {
    e.preventDefault()
-   const options = {
-     method: 'POST',
-     headers: {
-       'Content-type': 'application/json',
-       'Accept': 'application/json'
-     },
-     body: JSON.stringify({comment: {comment: this.state.comment, pano_id: this.props.id}})
-    }
-    fetch('http://localhost:3030/comments', options)
-    this.setState({
-
-    })
-    this.resetForm()
-  }
-
+   // const arr = this.state.comments.concat(e.target.value)
+   const date = new Date().toDateString()
+   this.setState({
+     comments: this.state.comments.concat(date + ':' + ' ' + this.state.comment)
+   })
+   this.props.addComment({comment: this.state.comment, pano_id: this.props.id})
+   this.resetForm(e)
+ }
 
  render() {
    // debugger
    console.log('pano id:', this.props.id);
-   console.log('render boolean:', this.state.render);
-   console.log('no of likes:', this.state.likes);
-   console.log('oneLikes props:', this.props.oneLike);
+   console.log('comment props:', this.props.comments);
+   console.log('comments state:', this.state.comments);
     return(
       <div className='card-container'>
         <div className="card large">
@@ -119,9 +103,9 @@ class PanoContainer extends React.Component {
             {/*VR button*/}
             <p><Link to='/vr' onClick={this.handleVR}>View in VR</Link></p>
             {/*comment form*/}
-             <div>Add Comment: <form id='comment-form' onSubmit={this.handleSubmit}>
+             <div>Add Comment: <form id='comment-form' onSubmit={this.handleSubmit} >
                <input className='comment-field' type='text' value={this.state.comment} onChange={this.handleText} >
-               </input><input type='submit'></input>
+               </input><input type='submit' onClick={this.setComments}></input>
               </form>
             </div>
          </div>
@@ -130,8 +114,7 @@ class PanoContainer extends React.Component {
            <span className="card-title grey-text text-darken-4">{this.props.user}<i className="material-icons right">close</i></span>
            <p>{this.props.date}</p>
            <ul>
-             {this.props.comments}
-
+             {this.state.comments}
            </ul>
          </div>
        </div>
