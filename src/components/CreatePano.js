@@ -17,8 +17,10 @@ class CreatePano extends React.Component {
   }
 
   onImageDrop = (files) => {
+    console.log(files);
     this.setState({
-      uploadedFile: files
+      uploadedFile: files,
+      imageUrl: files[0].preview
     });
   }
 
@@ -45,11 +47,18 @@ class CreatePano extends React.Component {
      }
 
      if (response.body.secure_url !== '') {
+       this.setState({
+         imageUrl: response.body.secure_url
+       })
        this.props.createPano({url: response.body.secure_url, userId: this.props.currentUser.user.id, caption: this.state.caption})
-       this.props.history.push(`/view`)
+       this.props.history.push(`/profile`)
 
      }
    });
+  }
+
+  renderPreview = () => {
+    return this.state.imageUrl ? <img src={this.state.imageUrl} id='img-preview'/> : null
   }
 
   render(){
@@ -65,6 +74,7 @@ class CreatePano extends React.Component {
           onDrop={this.onImageDrop}>
           <p>Drop it like its hot</p>
         </Dropzone>
+        {this.renderPreview()}
         <form onSubmit={this.handleSubmit}>
         <label>Caption</label>
         <input type="text" name='caption' value={this.state.caption} onChange={this.handleChange}/>

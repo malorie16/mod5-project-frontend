@@ -18,44 +18,11 @@ class PanoContainer extends React.Component {
     render: true
   }
 
-  componentDidMount () {
-
-    // this.props.getComments()
-    // this.setState({
-    //   comments: this.props.allComments
-    // })
- }
-
  //sends user to vr page when 'View in vr' is clicked
  handleVR = () => {
    this.props.selectedPano({pano: {id: this.props.pano.id, pano_url: this.props.url, caption: this.props.caption}})
    this.props.history.push(`/vr`)
  }
-
- //renders comments
- // renderComments = () => {
- //   if (!this.state.comments) {
- //     return
- //   } else {
- //     const coms = this.state.comments.map(comment => {
- //       console.log(comment.comment);
- //       const date = new Date(comment.comment.created_at)
- //       if (comment.pano.id === this.props.id)
- //      return <li>{date.toDateString()}: {comment.comment} </li>
- //    })
- //    return coms.reverse()
- //    }
- //  }
- //
- //  commentCond = () => {
- //    if (this.props.history.location.pathname === '/profile') {
- //      return this.props.comments
- //    } else {
- //      return this.renderComments()
- //    }
- //  }
-
-
 
 //makes comment input a controlled field
  handleText = (e) => {
@@ -74,7 +41,6 @@ class PanoContainer extends React.Component {
  //makes POST request when comment form submits
  handleSubmit = (e) => {
    e.preventDefault()
-   // const arr = this.state.comments.concat(e.target.value)
    const date = new Date().toDateString()
    this.setState({
      comments: this.state.comments.concat(date + ':' + ' ' + this.state.comment)
@@ -84,10 +50,6 @@ class PanoContainer extends React.Component {
  }
 
  render() {
-   // debugger
-   console.log('pano id:', this.props.id);
-   console.log('comment props:', this.props.comments);
-   console.log('comments state:', this.state.comments);
     return(
       <div className='card-container'>
         <div className="card large">

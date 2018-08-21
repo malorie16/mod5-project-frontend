@@ -42,6 +42,7 @@ class App extends Component {
             <Route path='/vr' render={(routerProps) => {
             // ternary based on if mobile state is true panoramaDesktop or PanoramaMobile
               return this.renderRoute(<PanoramaMobile/>)
+              // return <PanoramaMobile/>
 
                 }}/>
              <Route path="/view" render={(routerProps) => {

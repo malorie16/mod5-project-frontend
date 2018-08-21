@@ -74,3 +74,8 @@ p {
 .heart:hover {
   transform: scale(1.5);
 }
+
+#img-preview {
+  width: 100vw;
+  height: 500px;
+}

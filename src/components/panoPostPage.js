@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PanoContainer from './panocontainer/panocontainer.js'
 
-
+// THIS COMPONENT MAY BE DEPRECATED 
 
 class PanoPost extends React.Component {
 

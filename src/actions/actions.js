@@ -37,42 +37,6 @@ export const createUser = (user) => {
       })
   }
 }
-//{email: user.email, name: user.name, password: user.password}
-// export const getUser = (user) => {
-//   const options = {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json',
-//       },
-//       method: 'POST',
-//       body: JSON.stringify({auth: {
-//         user
-//       }})
-//   }
-//
-//   return (dispatch) => {
-//
-//     console.log(dispatch);
-//     fetch(USER_URL + `/${user.email}`)
-//       .then(r => r.json())
-//       .then(data => {
-//         dispatch({
-//           type: 'GET_USER',
-//           payload: {
-//             currentUser: data
-//           }
-//         })
-//       })
-//   }
-// }
-
-// dispatch({
-//   type: GET_USER,
-//   //data.token  is our token to set in local storage
-//   payload: data.token
-// })
-
-
 
 export const loginUser = (email, password) => {
   const options = {

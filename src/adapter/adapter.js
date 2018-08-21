@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3030/panos'
+const baseURL = 'http://10.39.105.36:3030/panos'
 
 
 const createPano = (data) => {
