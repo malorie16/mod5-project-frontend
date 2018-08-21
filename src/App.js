@@ -21,6 +21,10 @@ class App extends Component {
 
  }
 
+ renderNav = () => {
+   return this.props.history.location.pathname === '/vr' ? null : <Nav />
+ }
+
   render() {
     // console.log(this.state.pano.image);
     // console.log('gotten pano:', this.state.getPano);

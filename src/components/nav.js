@@ -29,7 +29,7 @@ class Nav extends React.Component {
       return (
         <div>
         <nav>
-          <div className="nav-wrapper">
+          <div className="nav-wrapper" >
             <a href="" className="brand-logo">{this.props.currentUser.name}</a>
             <a href="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
               <ul className="right hide-on-med-and-down">
@@ -46,24 +46,23 @@ class Nav extends React.Component {
     } else {
       return (
         <div>
-        <nav>
-          <div className="nav-wrapper">
-            <a href="" className="brand-logo">{this.props.currentUser.name}</a>
+        <nav >
+          <div className="nav-wrapper"  >
+            <Link to='/profile'><a href="" className="brand-logo">{this.props.currentUser.user.name}</a></Link>
             <a href="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
               <ul className="right hide-on-med-and-down">
                 <li>{this.renderBackButton()}</li>
                 <li><Link to='/home'>Home</Link></li>
-                <li><Link to='/profile'>Profile</Link></li>
+                <li><Link to='/profile'>{this.props.currentUser.user.name}</Link></li>
                 <li><Link to='/upload'>Create Post</Link></li>
                 <li><Link to='/login' onClick={this.handleClick}>Logout</Link></li>
               </ul>
             </div>
           </nav>
-
-          <ul className="sidenav sidenav-close" id="mobile-demo">
+          <ul className="sidenav sidenav-close" style={{backgroundColor: this.props.history.location.pathname === '/vr' ? 'transparent' : null}} id="mobile-demo">
             <li>{this.renderBackButton()}</li>
             <li><Link to='/home'>Home</Link></li>
-            <li><Link to='/profile'>Profile</Link></li>
+            <li><Link to='/profile'>{this.props.currentUser.user.name}</Link></li>
             <li> <Link to='/upload'>Create Post</Link></li>
             <li><Link to='/login' onClick={this.handleClick}>Logout</Link></li>
           </ul>
