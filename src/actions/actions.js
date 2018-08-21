@@ -9,7 +9,7 @@ export const createUser = (user) => {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     },
     body: JSON.stringify({user: {email: user.email, name: user.name, password: user.password}})
   }
@@ -21,7 +21,7 @@ export const createUser = (user) => {
         fetch(BASE_URL + 'current_user', {
       headers: {
         'Content-Type': 'application/json',
-        Accepts: 'application/json',
+      Accept: 'application/json',
         Authorization: data.token
       }
     }).then(r => r.json())
@@ -42,7 +42,7 @@ export const loginUser = (email, password) => {
   const options = {
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json',
     },
     method: 'POST',
     body: JSON.stringify({
@@ -59,7 +59,7 @@ export const loginUser = (email, password) => {
       fetch(BASE_URL + 'current_user', {
     headers: {
       'Content-Type': 'application/json',
-      Accepts: 'application/json',
+    Accept: 'application/json',
       Authorization: data.token
     }
   }).then(r => r.json())
@@ -143,7 +143,7 @@ export const createPano = (pano) => {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     },
     body: JSON.stringify({pano: {user_id: pano.userId, pano_url: pano.url, caption: pano.caption}})
   }
@@ -191,7 +191,7 @@ export const like = (pano) => {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     },
     body: JSON.stringify({like: {likes: pano.likes, pano_id: pano.pano_id}})
   }
@@ -215,7 +215,7 @@ export const addLike = (pano) => {
     method: 'PATCH',
     headers: {
       'Content-type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     },
     body: JSON.stringify({like: {likes: pano.likes, pano_id: pano.pano_id}})
   }
@@ -239,7 +239,7 @@ export const unlike = (likes, pano) => {
     method: 'PATCH',
     headers: {
       'Content-type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     },
     body: JSON.stringify({like: {likes: likes, pano_id: pano.id}})
   }
@@ -263,7 +263,7 @@ export const addComment = (pano) => {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        'Accept': 'application/json'
+        Accept: 'application/json'
       },
       body: JSON.stringify({comment: {comment: pano.comment, pano_id: pano.pano_id}})
      }
