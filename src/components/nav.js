@@ -15,13 +15,11 @@ class Nav extends React.Component {
   }
 
   click = () => {
-     // not sure why I need this twice...
     this.props.history.goBack()
     return this.props.history.goBack()
   }
   renderBackButton = () => {
     return this.props.history.location.pathname === '/vr' ? <a hreh='#' onClick={this.click} >Back</a> : null
-
   }
 
   currentUser = () => {
@@ -37,7 +35,6 @@ class Nav extends React.Component {
               </ul>
             </div>
           </nav>
-
           <ul className="sidenav sidenav-close" id="mobile-demo">
             <li>{this.renderPath()}</li>
           </ul>
@@ -74,15 +71,6 @@ class Nav extends React.Component {
   render() {
     return (
       <div>{this.currentUser()}</div>
-      // <div>
-      //   <div>
-      //     {this.props.currentUser.name}
-      //     <Link to='/home'>Home</Link>
-      //     <Link to='/profile'>Profile</Link>
-      //     <Link to='/upload'>Create Post</Link>
-      //     <Link to='/login' onClick={this.handleClick}>Logout</Link>
-      //   </div>
-      // </div>
     )
   }
 }

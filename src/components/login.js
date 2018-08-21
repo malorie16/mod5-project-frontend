@@ -8,8 +8,7 @@ class Login extends React.Component {
   state = {
     user: {
       email: '',
-      password: '',
-      id: 1
+      password: ''
     }
   }
 
@@ -31,15 +30,11 @@ class Login extends React.Component {
   }
 
   handleSubmit = (e) => {
-
     e.preventDefault()
-    // this.props.getUser(this.state.user)
     this.props.loginUser(e.target.email.value.trim(), e.target.password.value.trim())
   }
 
   render () {
-    // console.log(this.state.user.password);
-    // console.log(this.state.user.email);
     return (
       <div className="login">
         <h3>Login</h3>

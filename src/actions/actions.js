@@ -95,7 +95,6 @@ export const getPanos = () => {
     fetch(PANO_URL)
       .then(r => r.json())
       .then(data => {
-        console.log('geting panos!');
         dispatch({
           type: 'GET_PANOS',
           payload: {
@@ -113,7 +112,6 @@ export const getPano = (id) => {
     fetch(PANO_URL + `/${id}`)
       .then(r => r.json())
       .then(data => {
-        console.log('in get user:', data);
         dispatch({
           type: 'GET_PANO',
           payload: {
@@ -153,7 +151,6 @@ export const createPano = (pano) => {
     fetch(PANO_URL, options)
       .then(r => r.json())
       .then(data => {
-        console.log('create pano fetch', data);
         dispatch({
           type: 'CREATE_PANO',
           payload: {
@@ -200,7 +197,6 @@ export const like = (pano) => {
     fetch(LIKES_URL, options)
       .then(r => r.json())
       .then(data => {
-        console.log('like post:', data);
         dispatch({
           type: 'LIKE',
           payload: {
@@ -224,7 +220,6 @@ export const addLike = (pano) => {
     fetch(LIKES_URL + `/${pano.like_id}`, options)
       .then(r => r.json())
       .then(data => {
-        console.log('add like action:', data);
         dispatch({
           type: 'ADD_LIKE',
           payload: {
@@ -287,7 +282,6 @@ export const getComments = () => {
     fetch(COMMENTS_URL)
     .then(r => r.json())
     .then(data => {
-      console.log('getting comments!');
       dispatch({
         type: 'GET_COMMENTS',
         payload: {
@@ -297,12 +291,6 @@ export const getComments = () => {
     })
   }
 }
-
-// export const removeComment = () => {
-//   return {
-//     type: 'REMOVE_COMMENT'
-//   }
-// }
 
 export const mobile = (boolean) => {
   return {

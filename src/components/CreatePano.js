@@ -43,7 +43,6 @@ class CreatePano extends React.Component {
 
    upload.end((err, response) => {
      if (err) {
-       console.error(err);
      }
 
      if (response.body.secure_url !== '') {
@@ -62,7 +61,6 @@ class CreatePano extends React.Component {
   }
 
   render(){
-    console.log('pano:', this.props.clickedPano)
     return (
       <div className='div'>
         <p id='create-p'>Upload a Pano!</p>

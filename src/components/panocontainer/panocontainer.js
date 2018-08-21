@@ -14,8 +14,7 @@ class PanoContainer extends React.Component {
       caption:''
     },
     comment: '',
-    comments: this.props.comments || [],
-    render: true
+    comments: this.props.comments || []
   }
 
  //sends user to vr page when 'View in vr' is clicked

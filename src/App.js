@@ -18,7 +18,6 @@ class App extends Component {
 
  renderRoute = (route) => {
    return this.props.currentUser.user.name !== 'logged out' ?  route : <Redirect to='/login' />
-
  }
 
  renderNav = () => {
@@ -26,8 +25,6 @@ class App extends Component {
  }
 
   render() {
-    // console.log(this.state.pano.image);
-    // console.log('gotten pano:', this.state.getPano);
     return (
       <div>
         <Nav />
@@ -35,7 +32,6 @@ class App extends Component {
         <Switch>
             <Route path="/upload" render={(routerProps) => {
               return this.renderRoute(<CreatePano handlePano={this.handlePano}/>)
-
               }} />
             <Route path="/profile" render={(routerProps) => {
                 return this.renderRoute(<Profile/>)
@@ -47,15 +43,12 @@ class App extends Component {
             // ternary based on if mobile state is true panoramaDesktop or PanoramaMobile
               return this.renderRoute(<PanoramaMobile/>)
               // return <PanoramaMobile/>
-
                 }}/>
              <Route path="/view" render={(routerProps) => {
                return this.renderRoute(<PanoPost/>)
-
                   }} />
              <Route path="/home" render={(routerProps) => {
                return this.renderRoute(<Home/>)
-
                }} />
              <Route path="/signup" render={(routerProps) => {
                  return <CreateUser  />
