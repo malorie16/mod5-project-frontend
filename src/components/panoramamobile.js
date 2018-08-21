@@ -1,5 +1,5 @@
 import React from 'react'
-import aframe from 'aframe'
+import aframe from '../../node_modules/aframe'
 //was just import 'aframe'
 import { connect } from 'react-redux'
 
