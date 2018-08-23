@@ -1,0 +1,36 @@
+@import url("./App.css");
+
+#likes-span, #vr-button, #comment-div {
+  font-family: 'Arriere';
+  color: black !important;
+}
+
+#vr-button {
+  border-bottom: solid 2px #21D4FD;
+  font-size: 20px;
+}
+
+#comment-div {
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.input-comment {
+  outline: none;
+  background: transparent;
+  font-family: 'Cherry';
+  font-weight: bolder;
+  height: 30px;
+  border-color: #21D4FD;
+  border-width: 3px;
+  transition: all 0.45s;
+  cursor: pointer;
+}
+
+.input-comment:hover {
+  color: #21D4FD;
+}
+
+.initial-field.comment {
+  color: black !important
+}

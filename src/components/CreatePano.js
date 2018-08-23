@@ -4,6 +4,8 @@ import Dropzone from 'react-dropzone'
 import request from 'superagent'
 import { createPano } from '../actions/actions.js'
 import { withRouter } from 'react-router-dom'
+import '../upload.css'
+import { updateCurrentUserPano } from '../actions/actions.js'
 
 
 const CLOUDINARY_UPLOAD_PRESET = 'nq2cdlmm';
@@ -17,11 +19,12 @@ class CreatePano extends React.Component {
   }
 
   onImageDrop = (files) => {
-    console.log(files);
+
     this.setState({
       uploadedFile: files,
       imageUrl: files[0].preview
     });
+
   }
 
   handleChange = (e) => {
@@ -32,7 +35,11 @@ class CreatePano extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    if (this.state.uploadedFile.length === 0) {
+      alert('Please upload an image 📸')
+    } else {
     this.handleImageUpload(this.state.uploadedFile[0])
+    }
   }
 
   handleImageUpload = (file) => {
@@ -50,6 +57,8 @@ class CreatePano extends React.Component {
          imageUrl: response.body.secure_url
        })
        this.props.createPano({url: response.body.secure_url, userId: this.props.currentUser.user.id, caption: this.state.caption})
+       const date = new Date().toDateString()
+       this.props.updateCurrentUserPano({created_at: date, pano_url: response.body.secure_url, caption: this.state.caption})
        this.props.history.push(`/profile`)
 
      }
@@ -63,21 +72,24 @@ class CreatePano extends React.Component {
   render(){
     return (
       <div className='div'>
-        <p id='create-p'>Upload a Pano!</p>
-        <Dropzone
-          className='drop'
-          multiple={false}
-          accept="image/*"
-          disablePreview={false}
-          onDrop={this.onImageDrop}>
-          <p>Drop it like its hot</p>
-        </Dropzone>
-        {this.renderPreview()}
-        <form onSubmit={this.handleSubmit}>
-        <label>Caption</label>
-        <input type="text" name='caption' value={this.state.caption} onChange={this.handleChange}/>
-        <input type="submit" value='submit'/>
-        </form>
+        <p id='create-p'>Upload a Pano</p>
+        <div className='drop-div'>
+          <p>click below to upload</p>
+            <Dropzone
+              className='drop'
+              multiple={false}
+              accept="image/*"
+              disablePreview={false}
+              onDrop={this.onImageDrop}>
+                <div class="lds-dual-ring"></div>
+            </Dropzone>
+          </div>
+          {this.renderPreview()}
+          <form onSubmit={this.handleSubmit} id='upload-form'>
+          <label id='upload-label'>Caption:</label>
+          <input type="text" name='caption' value={this.state.caption} onChange={this.handleChange} id='upload-input'/>
+          <input type="submit" value='submit' className='initial-submit upload'/>
+          </form>
       </div>
     )
   }
@@ -90,4 +102,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { createPano })(CreatePano))
+export default withRouter(connect(mapStateToProps, { createPano, updateCurrentUserPano })(CreatePano))

@@ -18,7 +18,7 @@ class Likes extends React.Component {
 //post only post
   render() {
     return (
-      <span className="card-title activator grey-text text-darken-4"><img className='heart' src='heart.svg' onClick={this.like}></img> {this.state.likes} likes</span>
+      <span id='likes-span' className="card-title activator grey-text text-darken-4"><img className='heart' src='heart.svg' onClick={this.like}></img> {this.state.likes} likes</span>
     )
   }
 }

@@ -13,7 +13,7 @@ class PanoramaMobile extends React.Component {
         <a-assets>
           <img id="field" crossOrigin src={this.props.clickedPano.pano.pano_url} alt=""></img>
         </a-assets>
-        <a-sky src="#field" rotation="0 -130 0"></a-sky>
+        <a-sky src="#field" wasd-controls rotation="0 -130 0"></a-sky>
       </a-scene>
     )
   }

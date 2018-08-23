@@ -8,13 +8,12 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <!-- <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script> -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
 
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="loaders.min.css">
     <!-- aframe cdn -->
-    <!-- <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script crossorigin src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
@@ -35,7 +34,9 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
+    <div class="lds-heart"><div class='loading'></div></div>
+    <div id="root">
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -5,38 +5,31 @@ import { connect } from 'react-redux'
 import { getPanos } from '../actions/actions.js'
 
 
-
-
 class Profile extends React.Component {
 
   componentDidMount(){
     this.props.getPanos()
   }
 
-
   userPanos = () => {
     if (!this.props.currentUser.panos) {
-      return
+      return <p>Add some panos!</p>
     } else {
-
     const panos = this.props.currentUser.panos.map(pano => {
       const likes = !pano.likes ? null : pano.likes.length
-      const likeId = !pano.likes[0] ? null : pano.likes[0].id
+      // const likeId = !pano.likes[0] ? null : pano.likes[0].id
       const comments = pano.comments.map(comment => {
           const date = new Date(comment.created_at)
             return <li>{date.toDateString()}: {comment.comment} </li>
-
        })
       const panoDate = new Date(pano.pano.created_at)
-      return <PanoContainer key={pano.id} id={pano.pano.id} likes={likes} likeId={likeId} comments={comments} pano={pano} caption={pano.caption} url={pano.pano.pano_url} user={pano.user.name} date={panoDate.toDateString()}/>
+      return <PanoContainer key={pano.id} id={pano.pano.id} likes={likes} comments={comments} pano={pano} caption={pano.pano.caption} url={pano.pano.pano_url} user={pano.user.name} date={panoDate.toDateString()}/>
     })
     return panos.reverse()
     }
   }
 
   render() {
-
-
     return (
       <div>
       {this.userPanos()}

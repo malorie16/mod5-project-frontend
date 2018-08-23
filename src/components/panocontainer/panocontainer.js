@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getPanos, selectedPano, getPano, addComment, addLike, like, getComments } from '../../actions/actions.js'
 import { Link, withRouter } from 'react-router-dom'
 import Likes from './likes.js'
+import '../../panoContainer.css'
 
 class PanoContainer extends React.Component {
 
@@ -53,20 +54,20 @@ class PanoContainer extends React.Component {
       <div className='card-container'>
         <div className="card large">
           <div className="card-image waves-effect waves-block waves-light">
-            {/*pano*/}
             <img className="activator" src={this.props.url}/>
+            {/*pano*/}
           </div>
           {/*pano card slid down*/}
           <div className="card-content">
             {/*like button*/}
-            <Likes panoId={this.props.id} likes={this.props.likes} likeId={this.props.likeId}/>
+            <Likes panoId={this.props.id} likes={this.props.likes}/>
             <span className="card-title activator grey-text text-darken-4">{this.props.caption}<i className="material-icons right">more_vert</i></span>
             {/*VR button*/}
-            <p><Link to='/vr' onClick={this.handleVR}>View in VR</Link></p>
+            <p><Link to='/vr' onClick={this.handleVR} id='vr-button'>View in VR</Link></p>
             {/*comment form*/}
-             <div>Add Comment: <form id='comment-form' onSubmit={this.handleSubmit} >
-               <input className='comment-field' type='text' value={this.state.comment} onChange={this.handleText} >
-               </input><input type='submit' onClick={this.setComments}></input>
+             <div id='comment-div'>Add Comment: <form id='comment-form' onSubmit={this.handleSubmit} >
+               <input className='comment-field' type='text' value={this.state.comment} onChange={this.handleText} className='initial-field comment'>
+               </input><input type='submit' onClick={this.setComments} className='input-comment'></input>
               </form>
             </div>
          </div>

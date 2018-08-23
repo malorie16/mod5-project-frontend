@@ -5,12 +5,15 @@
   "dependencies": {
     "360-react-pannellum": "0.0.3",
     "aframe": "^0.8.2",
+    "loaders.css": "^0.1.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-dropzone": "^5.0.1",
+    "react-loaders": "^3.0.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "react-transition-group": "^2.4.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "superagent": "^3.8.3"

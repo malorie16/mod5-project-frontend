@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './App.css';
 import PanoramaDesktop from './components/panoramadesktop.js'
 import PanoramaMobile from './components/panoramamobile.js'
@@ -12,7 +13,6 @@ import Profile from './components/profile.js'
 import Home from './components/home.js'
 import PanoPost from './components/panoPostPage.js'
 
-
 class App extends Component {
 
 
@@ -20,47 +20,62 @@ class App extends Component {
    return this.props.currentUser.user.name !== 'logged out' ?  route : <Redirect to='/login' />
  }
 
- renderNav = () => {
-   return this.props.history.location.pathname === '/vr' ? null : <Nav />
- }
-
   render() {
+    const loader = document.getElementById('lds-heart');
+
+    if (loader && !loader.hasAttribute('hidden')) {
+      loader.setAttribute('hidden', 'true');
+    }
+
     return (
+
       <div>
         <Nav />
-
-        <Switch>
-            <Route path="/upload" render={(routerProps) => {
-              return this.renderRoute(<CreatePano handlePano={this.handlePano}/>)
-              }} />
-            <Route path="/profile" render={(routerProps) => {
-                return this.renderRoute(<Profile/>)
-              }} />
-            <Route path="/profile/:id" render={(routerProps) => {
-                return  <Profile />
-              }} />
-            <Route path='/vr' render={(routerProps) => {
-            // ternary based on if mobile state is true panoramaDesktop or PanoramaMobile
-              return this.renderRoute(<PanoramaMobile/>)
-              // return <PanoramaMobile/>
-                }}/>
-             <Route path="/view" render={(routerProps) => {
-               return this.renderRoute(<PanoPost/>)
+        <Route render={({ location }) => (
+          <div>
+        <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            classNames="fade"
+            timeout={{enter: 800, exit: 0}}
+            >
+            <Switch location={location}>
+                <Route path="/upload" render={(routerProps) => {
+                  return this.renderRoute(<CreatePano handlePano={this.handlePano}/>)
                   }} />
-             <Route path="/home" render={(routerProps) => {
-               return this.renderRoute(<Home/>)
-               }} />
-             <Route path="/signup" render={(routerProps) => {
-                 return <CreateUser  />
-               }} />
-             <Route path="/login" render={(routerProps) => {
-                 return this.props.currentUser.user.name === 'logged out' ?  <Login/> : <Redirect to='/profile' />
-               }} />
-             <Route path="/" render={(routerProps) => {
-               return <Redirect to='/login'/>
-               }} />
-          </Switch>
-      </div>
+                <Route path="/profile" render={(routerProps) => {
+                    return this.renderRoute(<Profile/>)
+                  }} />
+                <Route path="/profile/:id" render={(routerProps) => {
+                    return  <Profile />
+                  }} />
+                <Route path='/vr' render={(routerProps) => {
+                // ternary based on if mobile state is true panoramaDesktop or PanoramaMobile
+                  return this.renderRoute(<PanoramaMobile/>)
+                  // return <PanoramaMobile/>
+                    }}/>
+                 <Route path="/view" render={(routerProps) => {
+                   return this.renderRoute(<PanoPost/>)
+                      }} />
+                 <Route path="/home" render={(routerProps) => {
+                   return this.renderRoute(<Home/>)
+                 }} />
+               <Route path="/signup" render={(routerProps) => {
+                     return <CreateUser  />
+                   }} />
+                   <Route path="/login" render={(routerProps) => {
+                       return this.props.currentUser.user.name === 'logged out' ?  <Login/> : <Redirect to='/profile' />
+                   }} />
+                 <Route path="/" render={(routerProps) => {
+                   return <Redirect to='/login'/>
+                   }} />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        </div>
+          )}/>
+        </div>
+
     )
   }
 }

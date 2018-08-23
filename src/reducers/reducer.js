@@ -99,6 +99,22 @@ const reducer = (state = defaultState, action) => {
         ...state,
         clickedPano: action.payload.clickedPano
       }
+    case 'UPDATE_USER_PANO':
+    console.log('in update user pano:', state.currentUser);
+    state.currentUser.panos.push({comments: [], likes: [], user: state.currentUser.user, pano: {caption: action.payload.pano.caption, pano_url: action.payload.pano.pano_url, created_at: action.payload.pano.created_at, id: state.panos.length + 1}})
+    return {
+      ...state,
+      currentUser: {
+        user: {
+          id: state.currentUser.user.id,
+          email: state.currentUser.user.email,
+          name: state.currentUser.user.name,
+          password_digest: state.currentUser.user.password_digest,
+          created_at: state.currentUser.user.created_at
+        },
+        panos: state.currentUser.panos
+      }
+    }
       // initial amount of likes upon loggin in
     case 'LIKE':
       return {

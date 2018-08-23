@@ -11,7 +11,7 @@ class Nav extends React.Component {
   }
 
   renderPath = () => {
-    return this.props.history.location.pathname === '/signup' ? <Link to='/login' >Login</Link> : <Link to='/signup' >Signup</Link>
+    return this.props.history.location.pathname === '/signup' ? <Link to='/login' className='nav-link bottom'>Login</Link> : <Link to='/signup' className='nav-link bottom' >Signup</Link>
   }
 
   click = () => {
@@ -19,7 +19,7 @@ class Nav extends React.Component {
     return this.props.history.goBack()
   }
   renderBackButton = () => {
-    return this.props.history.location.pathname === '/vr' ? <a hreh='#' onClick={this.click} >Back</a> : null
+    return this.props.history.location.pathname === '/vr' ? <a href='#' className='nav-link top' onClick={this.click} >Back</a> : null
   }
 
   currentUser = () => {
@@ -28,38 +28,39 @@ class Nav extends React.Component {
         <div>
         <nav>
           <div className="nav-wrapper" >
-            <a href="" className="brand-logo">{this.props.currentUser.name}</a>
+            <Link to='/login' className=""><span className='panogram-title first'>Pan<img src='lens.svg' className='lens-icon first'/>gram</span></Link>
+
             <a href="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
               <ul className="right hide-on-med-and-down">
-                <li>{this.renderPath()}</li>
+                <li className='nav-link'>{this.renderPath()}</li>
               </ul>
             </div>
           </nav>
           <ul className="sidenav sidenav-close" id="mobile-demo">
-            <li>{this.renderPath()}</li>
+            <li className='nav-link'>{this.renderPath()}</li>
           </ul>
-          </div>
+        </div>
       )
     } else {
       return (
-        <div>
+        <div className='nav-container'>
         <nav >
           <div className="nav-wrapper"  >
-            <Link to='/profile'><a href="" className="brand-logo">{this.props.currentUser.user.name}</a></Link>
+            <Link to='/profile' className="brand-logo nav-link"><span className='panogram-title'>Pan<img src='lens.svg' className='lens-icon'/>gram</span> + {this.props.currentUser.user.name}</Link>
             <a href="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
               <ul className="right hide-on-med-and-down">
-                <li>{this.renderBackButton()}</li>
-                <li><Link to='/home'>Home</Link></li>
-                <li><Link to='/profile'>{this.props.currentUser.user.name}</Link></li>
-                <li><Link to='/upload'>Create Post</Link></li>
-                <li><Link to='/login' onClick={this.handleClick}>Logout</Link></li>
+                <li className='nav-link'>{this.renderBackButton()}</li>
+                <li><Link to='/home' className='nav-link top'>Home</Link></li>
+                <li><Link to='/profile' className='nav-link top'>Profile</Link></li>
+                <li><Link to='/upload' className='nav-link top'>Create Post</Link></li>
+                <li><Link to='/login' className='nav-link bottom' onClick={this.handleClick}>Logout</Link></li>
               </ul>
             </div>
           </nav>
-          <ul className="sidenav sidenav-close" style={{backgroundColor: this.props.history.location.pathname === '/vr' ? 'transparent' : null}} id="mobile-demo">
+          <ul className="sidenav sidenav-close" id="mobile-demo">
             <li>{this.renderBackButton()}</li>
             <li><Link to='/home'>Home</Link></li>
-            <li><Link to='/profile'>{this.props.currentUser.user.name}</Link></li>
+            <li><Link to='/profile'>Profile</Link></li>
             <li> <Link to='/upload'>Create Post</Link></li>
             <li><Link to='/login' onClick={this.handleClick}>Logout</Link></li>
           </ul>

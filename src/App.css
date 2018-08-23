@@ -1,30 +1,168 @@
+@font-face {
+  font-family: 'Arriere';
+  src: url('./fonts/arriere_garde.ttf');
+}
+
+@font-face {
+  font-family: 'Cherry';
+  src: url('./fonts/Cherry Monospace-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Major';
+  src: url('./fonts/Major.ttf');
+}
+
+
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.fade-enter {
+  opacity: 0.01;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+html {
+  background: #0f0c29;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+nav {
+  background-image: radial-gradient( circle farthest-corner at 51.9% 51%,  rgba(255,255,255,1) 71%, rgba(246,246,246,1) 93.1% );
+  height: 57px;
+  margin-bottom: 17px;
+}
+
+.nav-link {
+  font-size: 72px;
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(26,20,74,1) 0%, rgba(59,52,120,1) 100.2% );    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.5s;
+  font-family: 'Arriere';
+  margin-left: 15px;
+}
+
+@media (max-width: 1400px) {
+  .nav-link {
+    font-size: 40px;
+  }
+}
+@media (max-width: 1139px) {
+  .nav-link {
+    font-size: 35px;
+  }
+}
+@media (max-width: 1072px) {
+  .nav-link {
+    font-size: 30px;
+  }
+}
+@media (max-width: 425px) {
+  .initial-field.comment {
+    width: 377px;
+  }
+}
+
+.nav-link.bottom {
+  background-image: radial-gradient( circle 1702px at -70.8% -20.8%,  rgba(221,221,221,1) 0%, rgba(25,46,152,1) 100.2% );
+}
+
+.nav-link:hover {
+  background-position: right center;
+  opacity: 0.8;
+}
+
+.lens-icon {
+  height: 20px;
+  width: 20px;
+}
+
+.panogram-title, .panogram-title.first {
+  background-color: #21D4FD;
+  background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 38px;
+  font-family: 'Arriere';
+}
+
+.panogram-title.first {
+  font-size: 72px;
+
+}
+
+
+.lens-icon.first {
+  height: 40px;
+  width: 40px;
+}
+
+.login, .input-field, .form-label {
+  text-align: center;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.form-label {
+  color: white !important;
+  font-size: 15px;
+  font-family: 'Arriere'
+}
+
+.initial-submit {
+  outline: none;
+  background: transparent;
+  font-family: 'Cherry';
   color: white;
+  height: 30px;
+  border-color: #21D4FD;
+  border-width: 3px;
+  transition: all 0.45s;
+  cursor: pointer;
+
 }
 
-.App-title {
-  font-size: 1.5em;
+.initial-submit:hover {
+  border-color: white;
+  color: #21D4FD;
 }
 
-.App-intro {
-  font-size: large;
+.initial-submit:hover {
+  background-position: right center;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.initial-field, #upload-input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: #21D4FD !important;
+  border-width: 2px !important;
+  color: white;
+  text-align: center;
+  font-family: 'Arriere';
+
+}
+
+
+h3 {
+  color: white;
+  font-family: 'Cherry';
 }
 
 .scene {
@@ -37,6 +175,10 @@
   position: absolute;
 }
 
+.input {
+  outline: none;
+}
+
 /* @media (max-width: 750px) {
   .scene {
     height: 350px;
@@ -45,17 +187,22 @@
   }
 } */
 
-.drop {
-  margin: 0 auto;
-  width: 200px;
-  border-style: dotted;
-  height: 200px;
+.login {
+  position: absolute;
+  margin-left: 500px;
+
 }
+
+
+
+/* .panogran-title.login {
+  position: fixed;
+  /* display: block; */
+
 
 canvas {
   height: 100vh;
   width: 100vw;
-
 }
 
 .div {
@@ -71,7 +218,7 @@ p {
 }
 
 .card-container, .card.large {
-  height: 543px;
+  height: 543px !important;
 }
 
 .heart {
@@ -82,9 +229,4 @@ p {
 
 .heart:hover {
   transform: scale(1.5);
-}
-
-#img-preview {
-  width: 100vw;
-  height: 500px;
 }

@@ -24,8 +24,16 @@ export const createUser = (user) => {
         'Content-Type': 'application/json'
 
       }
-    }).then(r => r.json())
+    }).then(r => {
+      if (r.status) {
+        return alert('Please fill out all fields!')
+
+      } else {
+      r.json()
+    }
+  })
         .then(user => {
+        
           localStorage.setItem('token', data.token)
           dispatch({
             type: 'CREATE_USER',
@@ -33,6 +41,7 @@ export const createUser = (user) => {
               currentUser: user
             }
           })
+
         })
       })
   }
@@ -182,7 +191,16 @@ export const selectedPano = (pano) => {
     }
   }
 }
-//
+
+
+export const updateCurrentUserPano = (pano) => {
+  return {
+    type: 'UPDATE_USER_PANO',
+    payload: {
+      pano: pano
+    }
+  }
+}
 
 export const like = (pano) => {
   const options = {
