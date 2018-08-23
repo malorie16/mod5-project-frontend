@@ -76,7 +76,7 @@ class PanoContainer extends React.Component {
            <span className="card-title grey-text text-darken-4">{this.props.user}<i className="material-icons right">close</i></span>
            <p>{this.props.date}</p>
            <ul>
-             {this.state.comments}
+             {this.state.comments.reverse()}
            </ul>
          </div>
        </div>
