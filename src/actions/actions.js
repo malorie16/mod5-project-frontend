@@ -14,7 +14,9 @@ export const createUser = (user) => {
     body: JSON.stringify({user: {email: user.email, name: user.name, password: user.password}})
   }
   return (dispatch) => {
-
+    dispatch({
+      type: 'LOADING'
+    })
     fetch(USER_URL, options)
       .then(r => r.json())
       .then(data => {
@@ -22,25 +24,21 @@ export const createUser = (user) => {
       headers: {
         Authorization: data.token,
         'Content-Type': 'application/json'
-
       }
-    }).then(r => {
-      if (r.status) {
-        return alert('Please fill out all fields!')
-
-      } else {
-      r.json()
-    }
-  })
+    }).then(r => r.json())
         .then(user => {
-        
-          localStorage.setItem('token', data.token)
-          dispatch({
-            type: 'CREATE_USER',
-            payload: {
-              currentUser: user
-            }
-          })
+          if (user.status) {
+            return alert('Please fill out all fields!')
+          } else {
+            localStorage.setItem('token', data.token)
+            dispatch({
+              type: 'CREATE_USER',
+              payload: {
+                currentUser: user
+              }
+            })
+
+          }
 
         })
       })
@@ -60,6 +58,9 @@ export const loginUser = (email, password) => {
     })
   }
   return (dispatch) => {
+    dispatch({
+      type: 'LOADING'
+    })
     //fetch to auth controller to get token
     fetch(BASE_URL + 'auth', options)
     .then(res => res.json())
@@ -75,7 +76,7 @@ export const loginUser = (email, password) => {
       .then(user => {
         if (user.status) {
           return alert('Incorrect email address or password')
-
+          dispatch({ type: 'LOADING'})
         } else {
         localStorage.setItem('token', data.token)
         dispatch({

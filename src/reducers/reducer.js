@@ -41,11 +41,18 @@ const defaultState = {
   },
   panos: [],
   oneLike: [],
-  allComments: []
+  allComments: [],
+  loading: false
 }
 
 const reducer = (state = defaultState, action) => {
   switch (action.type){
+    case 'LOADING':
+    console.log('in reducer', state.loading);
+      return {
+        ...state,
+        loading: !state.loading
+      }
     case 'MOBILE_TOGGLE':
       return {
         ...state,
@@ -54,13 +61,15 @@ const reducer = (state = defaultState, action) => {
     case 'CREATE_USER':
       return {
         ...state,
-        currentUser: action.payload.currentUser
+        currentUser: action.payload.currentUser,
+        loading: !state.loading
       }
     case 'GET_USER':
 
       return {
         ...state,
-        currentUser: action.payload.currentUser
+        currentUser: action.payload.currentUser,
+        loading: !state.loading
       }
     case 'CLICKED_USER':
       return {

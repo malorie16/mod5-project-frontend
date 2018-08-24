@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { loginUser } from '../actions/actions.js'
 import { withRouter } from 'react-router-dom'
+import Loader from './loader.js'
+
 
 class Login extends React.Component {
 
@@ -35,6 +37,9 @@ class Login extends React.Component {
   }
 
   render () {
+    if (this.props.loading) {
+      return <Loader />
+    } else {
     return (
       <div >
         <form onSubmit={this.handleSubmit} className="login">
@@ -49,9 +54,15 @@ class Login extends React.Component {
           </form>
       </div>
       )
+      }
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loading
   }
 }
 
 
-
-export default withRouter(connect(null, { loginUser })(Login))
+export default withRouter(connect(mapStateToProps, { loginUser })(Login))

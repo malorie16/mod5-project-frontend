@@ -6,10 +6,11 @@ import { createPano } from '../actions/actions.js'
 import { withRouter } from 'react-router-dom'
 import '../upload.css'
 import { updateCurrentUserPano } from '../actions/actions.js'
+import Loader from './loader.js'
 
 
-const CLOUDINARY_UPLOAD_PRESET = 'nq2cdlmm';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dvwowjik5/upload';
+const CLOUDINARY_UPLOAD_PRESET = `${process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET}`
+const CLOUDINARY_UPLOAD_URL = `${process.env.REACT_APP_CLOUDINARY_UPLOAD_URL}`
 
 class CreatePano extends React.Component {
   state = {

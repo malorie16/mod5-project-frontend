@@ -16,10 +16,10 @@ class Nav extends React.Component {
 
   click = () => {
     this.props.history.goBack()
-    return this.props.history.goBack()
   }
+
   renderBackButton = () => {
-    return this.props.history.location.pathname === '/vr' ? <a href='#' className='nav-link top' onClick={this.click} >Back</a> : null
+    return this.props.history.location.pathname === '/vr' ? <li className='nav-link top' onClick={this.click} >Back</li> : null
   }
 
   currentUser = () => {
@@ -58,11 +58,11 @@ class Nav extends React.Component {
             </div>
           </nav>
           <ul className="sidenav sidenav-close" id="mobile-demo">
-            <li>{this.renderBackButton()}</li>
-            <li><Link to='/home'>Home</Link></li>
-            <li><Link to='/profile'>Profile</Link></li>
-            <li> <Link to='/upload'>Create Post</Link></li>
-            <li><Link to='/login' onClick={this.handleClick}>Logout</Link></li>
+            {this.renderBackButton()}
+            <li className='nav-link top'><Link to='/home'>Home</Link></li>
+            <li className='nav-link top'><Link to='/profile'>Profile</Link></li>
+            <li className='nav-link top'> <Link to='/upload'>Create Post</Link></li>
+            <li className='nav-link top'><Link to='/login' onClick={this.handleClick}>Logout</Link></li>
           </ul>
           </div>
       )

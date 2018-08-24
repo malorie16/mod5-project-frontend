@@ -21,7 +21,6 @@ class PanoContainer extends React.Component {
  //sends user to vr page when 'View in vr' is clicked
  handleVR = () => {
    this.props.selectedPano({pano: {id: this.props.pano.id, pano_url: this.props.url, caption: this.props.caption}})
-   this.props.history.push(`/vr`)
  }
 
 //makes comment input a controlled field
