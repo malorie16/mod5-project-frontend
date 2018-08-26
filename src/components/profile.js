@@ -12,8 +12,8 @@ class Profile extends React.Component {
   }
 
   userPanos = () => {
-      if (!this.props.currentUser.panos) {
-        return
+      if (this.props.currentUser.panos.length === 0) {
+        return <div className='greeting'><p >It's pretty dead in here.</p> <p>You should create some posts to liven things up!</p></div>
       } else {
       const panos = this.props.currentUser.panos.map(pano => {
         const likes = !pano.likes ? null : pano.likes.length

@@ -56,16 +56,17 @@ nav {
   transition: 0.5s;
   font-family: 'Arriere';
   margin-left: 15px;
+  cursor: pointer;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
   .nav-link {
-    font-size: 40px;
+    font-size: 40px !important;
   }
 }
 @media (max-width: 1139px) {
   .nav-link {
-    font-size: 35px;
+    font-size: 35px !important;
   }
 }
 @media (max-width: 1072px) {
@@ -199,7 +200,7 @@ nav {
 }
 
 
-h3 {
+h3, .greeting {
   color: white;
   font-family: 'Cherry';
 }
@@ -252,7 +253,7 @@ p {
   text-align: center;
 }
 
-#create-p {
+#create-p, .greeting {
   font-size: 50px;
 }
 
