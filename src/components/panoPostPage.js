@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PanoContainer from './panocontainer/panocontainer.js'
 
-// THIS COMPONENT MAY BE DEPRECATED 
+// THIS COMPONENT MAY BE DEPRECATED
 
 class PanoPost extends React.Component {
 
@@ -30,7 +30,6 @@ class PanoPost extends React.Component {
   }
 
   render() {
-    console.log('panopage', this.props.clickedPano);
     return (
       <div>
       <PanoContainer pano={this.props.clickedPano.pano} caption={this.props.clickedPano.pano.caption} url={this.props.clickedPano.pano.pano_url} user={this.props.clickedPano.user.name}/>

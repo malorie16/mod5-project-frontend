@@ -28,7 +28,6 @@ class App extends Component {
     }
 
     return (
-
       <div>
         <Nav />
         <Route render={({ location }) => (
@@ -50,9 +49,7 @@ class App extends Component {
                     return  <Profile />
                   }} />
                 <Route path='/vr' render={(routerProps) => {
-                // ternary based on if mobile state is true panoramaDesktop or PanoramaMobile
                   return this.renderRoute(<PanoramaMobile/>)
-                  // return <PanoramaMobile/>
                     }}/>
                  <Route path="/view" render={(routerProps) => {
                    return this.renderRoute(<PanoPost/>)
@@ -63,12 +60,12 @@ class App extends Component {
                <Route path="/signup" render={(routerProps) => {
                      return <CreateUser  />
                    }} />
-                   <Route path="/login" render={(routerProps) => {
-                       return this.props.currentUser.user.name === 'logged out' ?  <Login/> : <Redirect to='/profile' />
-                   }} />
-                 <Route path="/" render={(routerProps) => {
-                   return <Redirect to='/login'/>
-                   }} />
+               <Route path="/login" render={(routerProps) => {
+                     return this.props.currentUser.user.name === 'logged out' ?  <Login/> : <Redirect to='/profile' />
+                 }} />
+               <Route path="/" render={(routerProps) => {
+                 return <Redirect to='/login'/>
+                 }} />
               </Switch>
             </CSSTransition>
           </TransitionGroup>

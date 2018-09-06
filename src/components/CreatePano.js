@@ -20,7 +20,6 @@ class CreatePano extends React.Component {
   }
 
   onImageDrop = (files) => {
-
     this.setState({
       uploadedFile: files,
       imageUrl: files[0].preview
@@ -50,9 +49,6 @@ class CreatePano extends React.Component {
                        .field('file', file);
 
    upload.end((err, response) => {
-     if (err) {
-     }
-
      if (response.body.secure_url !== '') {
        this.setState({
          imageUrl: response.body.secure_url
@@ -61,7 +57,6 @@ class CreatePano extends React.Component {
        const date = new Date().toDateString()
        this.props.updateCurrentUserPano({created_at: date, pano_url: response.body.secure_url, caption: this.state.caption})
        this.props.history.push(`/profile`)
-
      }
    });
   }

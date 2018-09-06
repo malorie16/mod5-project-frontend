@@ -12,10 +12,9 @@ class Likes extends React.Component {
       this.setState({
         likes: this.state.likes + 1
       })
-       this.props.like({likes: this.state.likes + 1, pano_id: this.props.panoId})
+      this.props.like({likes: this.state.likes + 1, pano_id: this.props.panoId})
   }
 
-//post only post
   render() {
     return (
       <span id='likes-span' className="card-title activator grey-text text-darken-4"><img className='heart' src='heart.svg' onClick={this.like}></img> {this.state.likes} likes</span>
